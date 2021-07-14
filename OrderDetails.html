@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Order Details</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="Project css.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+    <!-- firebase code -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+    <script src="index.js" defer></script>
+    <style>
+        .backgroundcontainer {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 25px 50px;
+        }
+        
+        .OrderDetailsrectangles {
+            background-color: #F2F2F2;
+            width: 100%;
+            padding-left: 2%;
+            padding-right: 2%;
+            padding-bottom: 5%;
+            padding-top: 1%;
+        }
+        
+        .OrderDetailsh2 {
+            font-weight: bold;
+        }
+        
+        .OrderDetailsh5 {
+            font-weight: bolder;
+            color: #5993AC;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        
+        .spantextinsiderectangles {
+            color: #5993AC;
+            font-weight: normal;
+            font-size: 18px;
+        }
+        
+        .ptextrectangles {
+            padding-left: 1%;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        /*footer*/
+        
+        footer {
+            text-align: center;
+            position: relative;
+            background-color: #5993AC;
+            font-size: 14px;
+            font-family: "Times New Roman", Times, serif;
+            color: #FFFFFF;
+        }
+        
+        footer p {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        
+        footer p img {
+            padding-top: 0px;
+            padding-left: 2.5px;
+            padding-right: 2.5px;
+            padding-bottom: 2pt;
+            width: 20px;
+            height: 18px;
+        }
+        /*links above the h and contact us*/
+        
+        a.nodec {
+            text-decoration: none;
+            color: #797979;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .contactuslinkcolor {
+            color: #FFFFFF;
+        }
+    </style>
+
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '117e42eb078ba2256a65adb5c21061355a02099b';
+        window.smartsupp || (function(d) {
+            var s, c, o = smartsupp = function() {
+                o._.push(arguments)
+            };
+            o._ = [];
+            s = d.getElementsByTagName('script')[0];
+            c = d.createElement('script');
+            c.type = 'text/javascript';
+            c.charset = 'utf-8';
+            c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?';
+            s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+
+
+</head>
+
+<!-- start of the header-->
+
+<body onload="orderDetail()" class=headerbody>
+
+    <div class="d-flex p-2 bg-main">
+        <a href="index.html" id="bar-text"><i class="fa fa-user-circle-o"> Register</i></a>
+        <div class="ml-auto"><a href="FAQ.html" id="bar-text"><i class="fa fa-question-circle-o"></i></a></div>
+    </div>
+
+
+    <div style="clear:both; margin-top:8px;">
+        <div class="row d-flex align-items-center">
+            <div class="col-sm"><img style="margin-left: 20px;" src="photo/logo_left.png" width="150" height="100"></div>
+            <div class="col-sm"><img src="photo/logo_center.png" width="300" height="100"></div>
+        </div>
+    </div>
+
+
+    <ul class="nav justify-content-center p-2 bg-main" id="bar-text">
+        <li class="nav-item"><a href="#" id="bar-text"><i class="fa fa-home"></i></a>
+        </li>
+        <li class="nav-item"><a href="Mathematics-student.html">Mathematics</a></li>
+        <li class="nav-item"><a href="Biology-student.html">Biology</a></li>
+        <li class="nav-item"><a href="Physics-student.html">Physics</a></li>
+        <li class="nav-item"><a href="Chemistry-student.html">Chemistry</a></li>
+        <li class="nav-item"><a href="Common-student.html">Common</a></li>
+        <li class="nav-item"><a href="E-Book-student.html">E-Book</a></li>
+
+        <li class="nav-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+            <a href="#" id="bar-text"><i class="fa fa-bars"></i></a>
+        </li>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" onclick="navigateProfile()">Profile</a>
+            <a onclick="navigation('My%20books.html')" class="dropdown-item">My Books</a>
+            <a class="dropdown-item" onclick="navigation('Report-Admin.html')">Reports</a>
+            <a onclick="navigation('My%20order.html')" class="dropdown-item">My order</a>
+            <a onclick="signOut()" class="dropdown-item">Sign Out</a>
+
+        </div>
+
+    </ul>
+    <!--end of the header-->
+
+    <br>
+
+    <body>
+
+        <section class="sections">
+            <div class="backgroundcontainer">
+                <a class="nodec" href="#">Homepage</a> / <a class="nodec" href="#">Order Details</a>
+
+                <br>
+                <br>
+
+                <h2 class="OrderDetailsh2">Order Details</h2>
+
+                <hr class="horizontalline">
+
+                <br>
+
+                <div class="OrderDetailsrectangles">
+                    <p class="OrderDetailsh5 orderId">Order #Loading...</p>
+                    <p class="ptextrectangles ">Book Name:&nbsp;<span class="spantextinsiderectangles orderBookName">Loading...</span>
+                    </p>
+                    <p class="ptextrectangles ">Seller Name:&nbsp;<span class="spantextinsiderectangles orderSellerName">Loading...</span>
+                    </p>
+                    <p class="ptextrectangles ">Seller Email:&nbsp;<span class="spantextinsiderectangles orderSellerEmail">Loading...</span>
+                    </p>
+                    <form class="font">
+                        <div>
+
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </body>
+    <br>
+
+    <!-- start of the footer-->
+    <footer>
+        <p><strong>Contact us: </strong> &nbsp; &nbsp; <img src="photo/twitter.png"> <a class="contactuslinkcolor" class="nodec" href="https://twitter.com/csd_aca_uod?lang=ar">
+            @CSD_ACA_UOD
+        </a> &nbsp; &nbsp; <img src="photo/twitter.png"> <a class="contactuslinkcolor" class="nodec" href="https://twitter.com/scsc_iau?lang=ar">
+            @SCSC_IAU
+        </a> &nbsp; &nbsp; <img src="photo/email.png"> <a class="contactuslinkcolor" class="nodec" href="mailto: af.sci.dam@iau.edu.sa">
+            af.sci.dam@iau.edu.sa
+        </a>
+
+            <div style="margin-bottom: autos; padding-bottom: 6pt; ">
+                <img style="width: 20pt; height: 20pt; " src="photo/android.png">
+                <a class="contactuslinkcolor" class="nodec" href="https://play.google.com/store">
+            Download The App
+        </a>
+            </div>
+
+    </footer>
+    <!-- end of the footer-->
+</body>
+
+</html>
